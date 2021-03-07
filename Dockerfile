@@ -3,7 +3,8 @@ COPY . /opt/app
 WORKDIR /opt/app
 ENV EFB_DATA_PATH  /opt/app/ehforward_config
 ENV PROFILE default
-RUN apk --no-cache --virtual build add sed build-base libffi-dev openssl-dev &&\
+RUN sed -i "s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g" /etc/apk/repositories &&\
+	apk --no-cache --virtual build add sed build-base libffi-dev openssl-dev &&\
     apk --no-cache add jpeg-dev zlib-dev libmagic libwebp-dev ffmpeg cairo &&\
     pip install -U pip &&\
     pip install -r requirements.txt &&\
